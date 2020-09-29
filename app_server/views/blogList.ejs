@@ -9,24 +9,21 @@
 
     <!-- Required meta tags -->
 
-    <meta charset="utf-8" />
+     <meta charset="utf-8" />
 
-    <meta
+     <meta name="viewport"
 
-      name="viewport"
-
-      content="width=device-width, initial-scale=1,
-
-                shrink-to-fit=no"/>
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
 
-    <!-- Bootstrap CSS -->
+     <!-- Bootstrap CSS -->
 
-    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
-
-    <link rel="stylesheet" href="/stylesheets/style.css" />
-
-  </head>
+     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" />
+     <link rel="stylesheet" href="/stylesheets/style.css"/>
+     <link rel="stylesheet" 
+       href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" 
+       integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+   </head>
 
 
   <body>
@@ -35,29 +32,17 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-      <button
+      <div class="container">
 
-        class="navbar-toggler"
+        <a class="navbar-brand" href='/'>Joan Chica</a>
 
-        type="button"
+      <button class="navbar-toggler" type="button"
 
-        data-toggle="collapse"
+        data-toggle="collapse" data-target=""#collapsibleNavbar""
 
-        data-target="#navbarTogglerDemo03"
+             <span class="navbar-toggler-icon"></span>
 
-        aria-controls="navbarTogglerDemo03"
-
-        aria-expanded="false"
-
-        aria-label="Toggle navigation"
-
-      >
-
-        <span class="navbar-toggler-icon"></span>
-
-      </button>
-
-      <a class="navbar-brand" href="/">My Blog</a>
+       </button>
 
 
       <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -66,15 +51,19 @@
 
           <li class="nav-item">
 
-            <a class="nav-link" href="/blogList"
-
-              >List Blogs <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href='/'>My Blog</a>
 
           </li>
 
           <li class="nav-item">
 
-            <a class="nav-link" href="/blogAdd">Add Blog</a>
+            <a class="nav-link" href='/blogList'>List Blogs</a>
+
+          </li>
+
+          <li class="nav-item">
+       
+            <a class="nav-link" href='/blogAdd'>Add Blog</a>
 
           </li>
 
@@ -82,37 +71,104 @@
 
       </div>
 
-    </nav>
+     </div>
+
+   </nav>
 
     <!-- navigation bar END -->
 
+    <!-- blog list-->
 
-    <div class="container">
+     <div class="container">
+       <!--card1-->         
+       <div class="card">
+          <div class="card-header">
+          </div>
+          <div class="card-body">
+            <h5 class ="card-title">My first blog entry</h5>
+          </div>
+          <div class="card-footer">
+             <div class = "col-sm">
+                <ul class="nav justify-content-end nav-pills card-header-pills">  
+            
+                    <li class="nav-item ">
+                        <a class="nav-link " href="/blogEdit "> <i class=" fas fa-edit ">
+                        </i></a>
 
-        <h1> Blog List</h1>
+                     </li>
+                     <li class="nav-item ">
+                        <a class="nav-link " href="/blogDelete "> 
+                        <i class="fas fa-trash"></i></a>
+                     </li>
+               
+                  </ul>
 
-        <p>Blog feature is under construction</p>
+              </div>
+                                                              
+            </div>
+          
+         <div>        
+        <!--card2-->
 
-    </div>
+        <div class="card">
+           <div class="card-header">
+           </div>
+         <div class="card-body">
+           <h5 class ="card-title">What is the meaning of life?</h5>
+         </div>
+         <div class="card-footer">
+             <div class = "col-sm">
+                 <ul class="nav justify-content-end nav-pills card-header-pills">
+                     <li class="nav-item ">
+                        <a class="nav-link " href="/blogEdit ">
+                        <i class=" fas fa-edit "></i></a>
+                     </li>
+                     <li class="nav-item ">
+                        <a class="nav-link " href="/blogDelete ">
+                        <i class="fas fa-trash-alt "></i></a>
+                     </li>
+
+                   </ul>
+               </div>
+             </div>
+          </div>
+
+         <!--end card2-->
+         <!--card3-->
+
+         <div class="card">
+            <div class="card-header">
+            </div>
+            <div class="card-body">    
+              <h5 class ="card-title">I blog,therefore I am</h5>
+            </div>
+            <div class="card-footer">
+              <div class = "col-sm">
+                <ul class="nav justify-content-end nav-pills card-header-pills">
+                    <li class="nav-item ">
+                        <a class="nav-link " href="/blogEdit ">
+                        <i class=" fas fa-edit "></i></a>
+                    </i>
+                    <li class="nav-item ">
+                        <a class="nav-link " href="/blogDelete ">
+                        <i class="fas fa-trash-alt "></i></a>
+                    </li>
+                 <ul>
+              </div>
+            </div>
+          </div>     
+                    
 
 
-    <div class="container">
-
-      <footer><small>&copy; Copyright 2020, Name</small></footer>
-
-    </div>
 
 
-    <!-- Optional JavaScript -->
 
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <!-- Optional JavaScript -->
+        <script src="/javascripts/jquery.min.js "></script>
+        <script src="/javascripts/popper.min.js "></script>
+        <script src="/javascripts/bootstrap.min.js "></script>
 
-    <script src="/javascripts/jquery.min.js"></script>
 
-    <script src="/javascripts/popper.min.js"></script>
 
-    <script src="/javascripts/bootstrap.min.js"></script>
-
-  </body>
-
+</body>
 </html>
