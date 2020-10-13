@@ -4,7 +4,7 @@
 
   <head>
 
-    <title><%=title%></title>
+    <title><Blog Edit></title>
 
 
     <!-- Required meta tags -->
@@ -66,14 +66,25 @@
     <!-- navigation bar END -->
 
 
-    <div class="container">
-
-        <h1>Edit Blog</h1>
-
-        <p>Under Construction</p>
-
-    </div>
-
+    
+      <div class="card">
+        <div class="card-header">
+        </div> 
+        <div class="card-body">
+            <form id="updateBlogEntry" action="" method="POST" name="updateBlogEntry">
+                <div class="form-group">
+                    <label for="summary" class="label">Blog Title</label>
+                    <input class="form-control" id="blog_title" name="blog_title" value= "<%= blog.blog_title %>">
+                    <label for="detail" class="label">Blog Text</label>
+                    <textarea class="form-control" id="blog_text" name="blog_text"><%= blog.blog_text %>"</textarea>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Save Blog">
+                
+            </form>
+        </div>
+      </div>
+      
+    <!-- container -->
 
     <div class="container">
 
