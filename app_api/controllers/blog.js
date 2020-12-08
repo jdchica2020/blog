@@ -2,23 +2,23 @@ const mongoose = require('mongoose');
 const Blog = mongoose.model('Blog');
 
 
-
 const returnListOfBlogs = (req, res) => {
-    Blog
+  Blog
 	.find()
 	.exec((err, blog) => {
 	if(!blog){
 	  return res 
-   		.status(404)
+   	.status(404)
 		.json({
-		"message": "no Blogs found"
+		    "message": "no Blogs found"
        });
-       }else if(err){
-          return res
-		.status(404)
-		.json(err);
+   }else if(err){
+      return res
+		  .status(404)
+		  .json(err);
    	}
-   	res
+    res
+     
 		.status(200) 
 		.json(blog);
         });
@@ -31,7 +31,9 @@ const addBlog = (req, res) => {
 	Blog.create({
 	blog_title: req.body.blog_title,
 	blog_text:  req.body.blog_text,
-	created_On: req.body.created_On
+	blog_author: req.body.blog_author,//lab7 payload
+	blog_email: req.body.blog_email,//lab7
+    created_On: req.body.created_On
     	},(err, blog) => {
     	if (err){
 	   res
@@ -51,9 +53,9 @@ const addBlog = (req, res) => {
 // return a single blog given an id
 const returnSingleBlog = (req, res) => {
 	Blog 
-    	   .findById(req.params.blogid)
-	   .exec((err, blog) => {
-	   if(!blog){
+    .findById(req.params.blogid)
+	  .exec((err, blog) => {
+	  if(!blog){
 		
 	    return res
 		.status(404)
@@ -78,9 +80,9 @@ const updateBlog = (req, res) => { Blog
     .findById(req.params.blogid)
     .exec((err, blog) => { 
     	blog.blog_title = req.body.blog_title;
-		blog.blog_text = req.body.blog_text;
+		  blog.blog_text = req.body.blog_text;
      	blog.created_On = req.body.created_On;
-        blog.save((err, blog) => {
+      blog.save((err, blog) => {
 	if(err){
 	res
 			.status(404) 
@@ -120,7 +122,36 @@ const deleteBlog = (req, res) => {
 		.json({ "message": " no blog found"
     });
    }
- };
+};
+
+
+//list of the rates
+
+const rateBlog = (req, res) => {
+  Blog
+	.find()
+	.exec((err, blog) => {
+	if(!blog){
+	  return res 
+   	.status(404)
+		.json({
+		    "message": "no Blogs found"
+       });
+   }else if(err){
+      return res
+		  .status(404)
+		  .json(err);
+   	}
+    res
+     
+		.status(200) 
+		.json(blog);
+        });
+   };
+
+
+
+
 
 
 module.exports = {
@@ -128,5 +159,7 @@ module.exports = {
 	addBlog,
 	returnSingleBlog, 
 	updateBlog,
-	deleteBlog
+	deleteBlog,
+	rateBlog
+		
 };  
