@@ -35,6 +35,12 @@ app.config(function($routeProvider) {
             controllerAs: 'vm'
         })
 
+       .when('/blgRate', {//Lab8
+            templateUrl: 'pages/blgRate.html',
+            controller: 'rateController',
+            controllerAs: 'vm'
+        })
+
         .when('/blgDelete/:id', {
             templateUrl: 'pages/blgDelete.html',
             controller: 'deleteController',
@@ -93,6 +99,9 @@ function addBlog($http, authentication, data) {
 function deleteBlog($http, authentication, id) {
     return $http.delete('/api/blogs/' + id, { headers: { Authorization: 'Bearer '+ authentication.getToken() }} );
 }
+function rateBlog($http) {
+    return $http.get('/api/blogs');
+}
 
 
 
@@ -107,9 +116,13 @@ function deleteBlog($http, authentication, id) {
 
 app.controller('homeController', function homeController() {
     var vm = this;
-    vm.title = "Joan Chica";
+    vm.pageHeader = {
+        title: 'Joan Chica'
+    };
+    //vm.title = "Joan Chica";
     vm.message = "Welcome to my Blog Site!";
 });
+
 
 
 /* List Blog */
@@ -117,6 +130,10 @@ app.controller('homeController', function homeController() {
 app.controller('listController', ['$http', 'authentication', function listController($http, authentication) {
     var vm = this;
     vm.title = "Blog List";
+
+    vm.currentUser = function() {
+        return authentication.currentUser();
+    }
 
     vm.isLoggedIn = function(){
         return authentication.isLoggedIn();
@@ -129,7 +146,16 @@ app.controller('listController', ['$http', 'authentication', function listContro
         .error(function(e) {
             vm.message = "Could not get List Blog";
         });
+
 }]);
+
+
+
+
+app.controller('rateController', function rateController($scope) {
+    $scope.blog_count = 0;
+
+  });
 
 
 
@@ -140,11 +166,15 @@ app.controller('addController', ['$http', '$routeParams', '$state', 'authenticat
     vm.blog = {};
     vm.title = "Add Blog";
     
-
+    vm.currentUser = function() {
+        return authentication.currentUser();
+    }
     vm.submit = function() {
         var data = vm.blog;
         data.blog_title = userForm.blog_title.value;
         data.blog_text = userForm.blog_text.value;
+        data.blog_author = userForm.blog_author.value; //lab7
+        data.blog_email = userForm.blog_email.value;//lab7
         //data.created_On = userForm.created_On.value;
 
         addBlog($http, authentication, data)
@@ -157,6 +187,7 @@ app.controller('addController', ['$http', '$routeParams', '$state', 'authenticat
             });
     }
 }]);
+
 
 
 
@@ -200,6 +231,8 @@ app.controller('editController', ['$http', '$routeParams', '$state', 'authentica
 
 
 
+
+
 /* Delete a Single Blog */
 
 app.controller('deleteController', ['$http', '$routeParams', '$state', 'authentication', function deleteController($http, $routeParams, $state, authentication) {
@@ -236,6 +269,9 @@ app.controller('deleteController', ['$http', '$routeParams', '$state', 'authenti
         $state.go('blgList');
     }
 }]);
+
+
+
 
 
 

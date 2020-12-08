@@ -26,12 +26,13 @@
     <!-- Angular Templates -->
     <script type="text/ng-template" id="pages/home.html">
         <p></p>
-        <div class="container">
-            <div class="jumbotron-fluid">
-                <h1>{{vm.title}}</h1>
-                <h4>{{vm.message}}</h4>
-            </div>
-        </div>        
+        
+            <div class="jumbotron-fluid shadow">
+                <div class="card justify-content"> 
+                    <h1>{{vm.pageHeader.title}}</h1>
+                    <p>{{vm.message}}</p>
+                </div>
+            </div>        
     </script>
 
     
@@ -45,21 +46,42 @@
         <p></p>
         <div class="card border-primary" style="width: 50%"> 
             <div class="card">   
+                <div class="card-header">
+                    <p>
+                        
+                    </p>
+                </div>    
                 <div class="card-body">
                     <h5 class ="card-title">{{blog.blog_title}}</h5>
                     <p  class="card-text">{{blog.blog_text}}</p>
-                    <p ng-bind="blog.created_On | date:'MM/dd/yyyy h:mm a'"></p>
+                    <!--p ng-bind="blog.created_On | date:'MM/dd/yyyy h:mm a'"></p-->
                 </div>
                 <div class="card-footer" ng-controller="NavigationController">
                     <div class = "col-sm">
-                        <ul class="nav justify-content-end nav-pills card-header-pills">
-                            <li class="nav-item">
-                                <a ng-show="vm.isLoggedIn()" class="nav-link" href="#/blgEdit/{{blog._id}}"> <i class="fas fa-edit"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                 <a ng-show="vm.isLoggedIn()" class="nav-link" href="#/blgDelete/{{blog._id}}"> <i class="fas fa-trash-alt"></i></a>
-                            </li>
-                        </ul>
+                        <p><i>
+                            Published by {{ blog.blog_author }} on {{ blog.created_On | date : 'MM/dd/yy h:mm a' }}
+                        </i></p>
+                            
+                                <ul class="nav justify-content-end nav-pills card-header-pills">  
+                                    <li class="nav-item">                                       
+                                        <a ng-show="vm.isLoggedIn()" ng-click="blog.blog_count = blog.blog_count + 1" type="submit" class="btn btn-primary"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-hand-thumbs-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a9.84 9.84 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733.058.119.103.242.138.363.077.27.113.567.113.856 0 .289-.036.586-.113.856-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.163 3.163 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16v-1c.563 0 .901-.272 1.066-.56a.865.865 0 0 0 .121-.416c0-.12-.035-.165-.04-.17l-.354-.354.353-.354c.202-.201.407-.511.505-.804.104-.312.043-.441-.005-.488l-.353-.354.353-.354c.043-.042.105-.14.154-.315.048-.167.075-.37.075-.581 0-.211-.027-.414-.075-.581-.05-.174-.111-.273-.154-.315L12.793 9l.353-.354c.353-.352.373-.713.267-1.02-.122-.35-.396-.593-.571-.652-.653-.217-1.447-.224-2.11-.164a8.907 8.907 0 0 0-1.094.171l-.014.003-.003.001a.5.5 0 0 1-.595-.643 8.34 8.34 0 0 0 .145-4.726c-.03-.111-.128-.215-.288-.255l-.262-.065c-.306-.077-.642.156-.667.518-.075 1.082-.239 2.15-.482 2.85-.174.502-.603 1.268-1.238 1.977-.637.712-1.519 1.41-2.614 1.708-.394.108-.62.396-.62.65v4.002c0 .26.22.515.553.55 1.293.137 1.936.53 2.491.868l.04.025c.27.164.495.296.776.393.277.095.63.163 1.14.163h3.5v1H8c-.605 0-1.07-.081-1.466-.218a4.82 4.82 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z"/>
+                                          </svg></a>
+                                        <p> {{blog.blog_count}} </p>
+                                    </li>
+
+                                </ul>
+                                
+                        <div ng-if="blog.blog_author === vm.currentUser().name"> 
+                            <ul class="nav justify-content-end nav-pills card-header-pills">
+                                <li class="nav-item">
+                                    <a ng-show="vm.isLoggedIn()" class="nav-link" href="#/blgEdit/{{blog._id}}"> <i class="fas fa-edit"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                     <a ng-show="vm.isLoggedIn()" class="nav-link" href="#/blgDelete/{{blog._id}}"> <i class="fas fa-trash-alt"></i></a>
+                                </li>  
+                            </ul>
+                        </div>    
                     </div>	
                 </div>
             </div>
@@ -68,7 +90,7 @@
      </div>   
     </div>  
    
-    </script> 
+</script> 
         
              
     <!---Blog Add --->
@@ -77,7 +99,10 @@
         <p></p>
       <div class="container p-5">  
         <div class="card border-primary" style="width: 50%"> 
-        <div class="card">            
+        <div class="card"> 
+            <div class="card-header">
+                <p></p>
+            </div>            
             <div class="card-body">    
                 <form name="userForm" ng-submit="vm.submit()" ng-controller="addController">    
                     <div class="form-group">
@@ -85,6 +110,9 @@
                         <input class="form-control" id="title" name="blog_title">
                         <label for="detail" class="text">Blog Text</label>
                         <textarea class="form-control" id="text" rows="3" name="blog_text"></textarea>
+                        <label for="author" class="label">Author</label>
+                        <input readonly class="form-control" id="author" name="blog_author" value="{{ vm.currentUser().name}}">
+                        <input type="hidden" class="form-control" id="email" name="blog_email" value="{{ vm.currentUser().email }}">
                     </div>
             </div>
             <div class="card-footer">
@@ -109,7 +137,10 @@
     <script type="text/ng-template" id="pages/blgEdit.html">
         <div class="container p-5"> 
             <div class="card border-primary" style="width: 50%">  
-                <div class="card">            
+                <div class="card">  
+                    <div class="card-header">
+                        <p></p>
+                    </div>           
                     <div class="card-body">  
 
                         <form name="userForm" ng-submit="vm.submit()" ng-controller="editController" style="padding: 20px">
@@ -119,11 +150,25 @@
                                 <label for="detail" class="blog_text">Blog Text</label>
                                 <textarea class="form-control" id="blog_text" name="blog_text" rows="3">{{vm.blog.blog_text}}</textarea>
                             </div>
-                        <input type="submit" class="btn btn-primary" value="Save Blog">
-                        </form> 
-                    </div>
+                    </div>     
+                    
+                    <div class="card-footer">
+                        <div class="col-sm form-group ">
+                            <ul class="navigation">
+                                <li class="nav-item">
+                                    <button ng-click="vm.submit()" ng-controller="editController" type="submit" class="btn btn-primary">Save Blog</button>
+                                        
+                                </li>
+                            </ul>    
+                        </div>  
+                        </form>
+                    </div>    
+
+                        
                 </div>
-            </div>        
+            </div> 
+        </div> 
+                
     </script>
 
     
@@ -132,26 +177,94 @@
     <script type="text/ng-template" id="pages/blgDelete.html">
       <div class="container p-5">  
         <div class="card border-primary" style="width: 50%">
-          <form name="userForm" ng-submit="vm.submit()" ng-controller="deleteController" style="padding: 20px"  id="deleteBlog" >    
-            <div class="form-group">
-                <label for="summary" class="title">Blog Title</label>
-                <input readonly class="form-control" id="blog_title" name="blog_title" value="{{vm.blog.blog_title}}">
-                <label for="detail" class="text">Blog Text</label>
-                <textarea readonly class="form-control" id="blog_text" name="blog_text" rows="3">{{vm.blog.blog_text}}</textarea>
+            <div class="card">    
+                <div class="card-header">
+                    <p></p>
+                </div>         
+                <div class="card-body">      
+                    <form name="userForm" ng-submit="vm.submit()" ng-controller="deleteController" style="padding: 20px"  id="deleteBlog" >    
+                        <div class="form-group">
+                            <label for="summary" class="title">Blog Title</label>
+                            <input readonly class="form-control" id="blog_title" name="blog_title" value="{{vm.blog.blog_title}}">
+                            <label for="detail" class="text">Blog Text</label>
+                            <textarea readonly class="form-control" id="blog_text" name="blog_text" rows="3">{{vm.blog.blog_text}}</textarea>
+                        </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="col-sm form-group ">
+                        <ul class="navigation">
+                            <li class="nav-item">
+                                <button ng-click="vm.submit()" ng-controller="deleteController" type="submit" class="btn float-right" value="deleteBtn">Delete</button>
+                                <a class="btn float-right otherBtn" href='#/blgList.html'>Cancel</a>
+                            </li>
+                        </ul>    
+                    </div>  
+                    </form>
+                </div>    
+
+                    
             </div>
-               <input type="submit" class="btn btn-danger float-right" value="Delete Blog">
-               <button ng-click="vm.cancel()" ng-controller="deleteController" class="btn btn-primary float-right" style="margin-right: 25px">Cancel</button>
-         
-               
-            </form>
-        </div>
-      </div>   
+        </div> 
+       </div> 
+            
     </script>
+
+
+
+
+                
+    <!---Blog Review 
+        
+
+    <script type="text/ng-template" id="pages/blgReview.html">
+            <p></p>
+          <div class="container p-5">  
+            <div class="card border-primary" style="width: 50%"> 
+            <div class="card"> 
+                <div class="card-header">
+                    <p class="lead">Add your Review</p>
+                </div>            
+                <div class="card-body">    
+                    <form name="userForm" ng-submit="vm.submit()" ng-controller="reviewController">    
+                        <div class="form-group">
+                            <label for="summary" class="author">Author</label>
+                            <input class="form-control" id="author" name="author">
+                            <label for="detail" class="text">Review Text</label>
+                            <textarea class="form-control" id="text" rows="3" name="reviewText"></textarea>
+                            <label for="rate" class="label">Rating</label>
+                            <input readonly class="form-control" id="rate" name="rating" value="{{ vm.currentUser().name}}">
+                        </div>
+                </div>
+                <div class="card-footer">
+                    <div class="col-sm form-group ">
+                        <ul class="navigation">
+                            <li class="nav-item">
+                                 <input ng-click="vm.submit()" ng-controller="reviewController" type="submit" class="btn btn-primary" value="Add Review">
+                            </li>
+                        </ul>    
+                    </div>  
+                    </form>
+                </div>    
+            </div>
+            </div> 
+          </div>       
+    </script>-->
+
+
+       
+
+           
+
+     <!---Blog Scripts --->
     <script src="/blogApp.js"></script>
     <script src="/common/auth/authentication.js"></script>
     <script src="/common/nav/navigation.js"></script>
     <!-- Angular View (dynamic content goes here) -->
     <div ng-view></div>
+    <div class="container">
+        <footer><small>&copy; 2020 Joan Chica</small></footer>
+    </div>
 
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/popper.min.js"></script>
